@@ -1,0 +1,55 @@
+ const columns = [
+    {
+      title: "Date",
+      dataIndex: "date",
+    },
+    {
+      title: "Time",
+      dataIndex: "time",
+    },
+    {
+      title: "Match type",
+      dataIndex: "matchtype",
+    },
+    {
+      title: "Court",
+      dataIndex: "court",
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+    },
+    {
+      title: "Format",
+      dataIndex: "format",
+    },
+  ];
+  const data = [
+    {
+      key: "1",
+      date: "15.07.2022",
+      time: "15:00",
+      matchtype: "KIA Tournament",
+      court: "Clay",
+      location: "MOS",
+      format: "Single",
+    },
+    {
+      key: "2",
+      date: "15.07.2022",
+      time: "13:00",
+      matchtype: "Comrade",
+      court: "Clay",
+      location: "MOS",
+      format: "Team",
+    },
+    {
+      key: "3",
+      date: "22.07.2022",
+      time: "16:00",
+      matchtype: "Final Tournament",
+      court: "Clay",
+      location: "MOS",
+      format: "Single",
+    },
+  ];
