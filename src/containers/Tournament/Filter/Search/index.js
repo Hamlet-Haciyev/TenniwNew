@@ -3,25 +3,17 @@ import { Input } from "antd";
 import styled from "styled-components";
 import Icon from "../../../../helpers/icons";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  searchTournament,
-  getTournamentFindBySearch,
-} from "../../../../store/tournament";
+import { searchTournament ,setFilterKeys} from "../../../../store/tournament";
 import { useRef } from "react";
 
 const Search = () => {
-  const tournaments = useSelector((state) => state.tournament.data);
+  // const tournaments = useSelector((state) => state.tournament.data);
   const dispatch = useDispatch();
   const refInput = useRef();
   const changeInput = (e) => {
+    // dispatch(filterTournament({ search: e.target.value }));
+    setFilterKeys(dispatch({ text: e.target.value, category: "" }));
     // dispatch(searchTournament(e.target.value));
-    dispatch(
-      getTournamentFindBySearch(
-        tournaments.filter((tournament) =>
-          tournament.name.toLowerCase().includes(e.target.value)
-        )
-      )
-    );
   };
   return (
     <SearchView>

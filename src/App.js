@@ -3,7 +3,7 @@ import Authorized from "./Authorized";
 import UnAuthorized from "./UnAuthorized";
 import { useSelector, useDispatch } from "react-redux";
 
-function App() {
+const App = () => {
   const logAuth = useSelector((state) => state.auth.authHorize);
   console.log(logAuth);
   return (

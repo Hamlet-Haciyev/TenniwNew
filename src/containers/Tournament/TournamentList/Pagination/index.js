@@ -17,7 +17,6 @@ export const PaginatedItems = ({ itemsPerPage, items }) => {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(items?.slice(itemOffset, endOffset));

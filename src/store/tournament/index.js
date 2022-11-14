@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 export const TournamentSlice = createSlice({
   name: "TournamentSlice",
   initialState: {
-    category: "history",
     data: [
       {
         id: 1,
@@ -269,7 +268,10 @@ export const TournamentSlice = createSlice({
         ],
       },
     ],
-    sortedTournaments: [],
+    filterKeys: {
+      text: "",
+      category: "",
+    },
     tournament: {},
   },
   reducers: {
@@ -281,15 +283,14 @@ export const TournamentSlice = createSlice({
         (tournament) => tournament.id == action.payload
       );
     },
-    getTournamentFindBySearch: (state, action) => {
-      state.sortedTournaments = action.payload;
+    setFilterKeys: (state, action) => {
+      // const { text, category } = action.payload;
+      console.log(action.payload);
+      // state.filterKeys.text = text;
+      // state.filterKeys.category = category;
     },
   },
 });
 export const TournamentReducer = TournamentSlice.reducer;
-export const {
-  switchCategory,
-  searchTournament,
-  getTournamentFindById,
-  getTournamentFindBySearch,
-} = TournamentSlice.actions;
+export const { switchCategory, searchTournament, getTournamentFindById ,setFilterKeys} =
+  TournamentSlice.actions;

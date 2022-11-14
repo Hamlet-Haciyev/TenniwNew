@@ -1,14 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { PaginatedItems } from "./Pagination";
 import styled from "styled-components";
 
-const TournamentList = () => {
-  const tournaments = useSelector((state) => state.tournament.data);
-  const category = useSelector((state) => state.tournament.category);
-  // const search = useSelector((state) => state.tournament.search);
-  const [search,setSearch] = useState("");
-  const [items, setItems] = useState([]);
+const TournamentList = ({ data }) => {
   const columns = [
     {
       title: "Name",
@@ -40,30 +34,6 @@ const TournamentList = () => {
     },
     { title: "Rules", accessor: "rules" },
   ];
-  useEffect(() => {
-    switch (category) {
-      case "current":
-        setItems(
-          tournaments.filter(
-            (tournament) =>
-              tournament.startDate < new Date() &&
-              tournament.endDate > new Date()
-          )
-        );
-        break;
-      case "history":
-        setItems(
-          tournaments.filter((tournament) => tournament.endDate < new Date())
-        );
-        break;
-      default:
-        setItems(
-          tournaments.filter((tournament) => tournament.startDate > new Date())
-        );
-        break;
-    }
-    
-  }, [category, search]);
   return (
     <TournamentListContainer>
       <TableHeader>
@@ -71,7 +41,7 @@ const TournamentList = () => {
           return <TableTitle>{column.title}</TableTitle>;
         })}
       </TableHeader>
-      <PaginatedItems itemsPerPage={6} items={items} />
+      <PaginatedItems itemsPerPage={6} items={data} />
     </TournamentListContainer>
   );
 };
