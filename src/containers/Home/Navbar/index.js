@@ -3,7 +3,6 @@ import React from "react";
 import styled from "styled-components";
 import { Container, ListGroup, ListGroupItem } from "../../../GlobalStyled";
 import Icon from "../../../helpers/icons";
-// import { FormItem, CustomInput } from "../../../components";
 
 const Navbar = () => {
   const { Option } = Select;

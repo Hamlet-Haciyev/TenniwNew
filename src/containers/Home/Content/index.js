@@ -16,10 +16,10 @@ const Content = () => {
             anim id est laborum
           </Text>
           <ButtonGroup>
-            <Button borradius={"7px"} middle padding={"20px 30px"}>
+            <Button borradius={"7px"} middle={true} padding={"20px 30px"}>
               <Link to={"/login"}>Login</Link>
             </Button>
-            <Button borradius={"7px"} bgcolor={"black"} color="#fff" middle padding={"20px 30px"}>
+            <Button borradius={"7px"} bgcolor={"black"} color="#fff" middle={true} padding={"20px 30px"}>
               <Link to={"/login"}>Guest Mode</Link>
             </Button>
           </ButtonGroup>

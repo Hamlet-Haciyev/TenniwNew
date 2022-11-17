@@ -1,53 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
 import TournamentList from "./TournamentList";
-import { switchCategory ,setFilterKeys} from "../../store/tournament";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Tournament = () => {
-  const dispatch = useDispatch();
-  const onChangeCategory = (e) => {
-    // dispatch(switchCategory(e.target.textContent.toLowerCase()));
-    // const allCategoryEl = document.querySelectorAll(".categoryList li");
-    // Array.from(allCategoryEl).map((item) => item.classList.remove("active"));
-    // e.target.classList.add("active");
-    setFilterKeys(
-      dispatch({ text: "", category: e.target.textContent.toLowerCase() })
-    );
-  };
-  const data = useSelector((state) => state.tournament.data);
+  const tournamentList = useSelector((state) => state.tournament.data);
   const filterKeys = useSelector((state) => state.tournament.filterKeys);
 
-  const [items, setItems] = useState([]);
+  const [data, setData] = useState([]);
 
-  const shouldDisplay = () => {};
-  useEffect(()=>{
-    console.log(filterKeys);
-  },[filterKeys])
+  const shouldDisplay = (tournament) => {
+    const { text, category } = filterKeys;
+    let matchesCategory = false;
+    let matchesSearchText =
+      text === "" ? true : tournament.name.toLowerCase().includes(text);
+    switch (category) {
+      case "current":
+        matchesCategory =
+          tournament.startDate < new Date() && tournament.endDate > new Date();
+        break;
+      case "history":
+        matchesCategory = tournament.endDate < new Date();
+        break;
+      default:
+        matchesCategory = tournament.startDate > new Date();
+        break;
+    }
+
+    return matchesSearchText && matchesCategory;
+  };
+
+  useEffect(() => {
+    setData(tournamentList.filter((tournament) => shouldDisplay(tournament)));
+  }, [filterKeys]);
+
   return (
     <>
-      <Filter onChangeCategory={onChangeCategory} />
-      <TournamentList data={data} />
+      <Filter />
+      {data.length == 0 ? "there is no data for search value..." : <TournamentList data={data} />}
     </>
   );
 };
 export default Tournament;
-// switch (state.category) {
-//   case "current":
-//     state.sortedTournaments = state.data.filter(
-//       (tournament) =>
-//         tournament.startDate < new Date() &&
-//         tournament.endDate > new Date() && tournament.name.toLowerCase().includes(search)
-//     );
-//     break;
-//   case "history":
-//     state.sortedTournaments = state.data.filter(
-//       (tournament) => tournament.endDate < new Date() && tournament.name.toLowerCase().includes(search)
-//     );
-//     break;
-//   default:
-//     state.sortedTournaments = state.data.filter(
-//       (tournament) => tournament.startDate > new Date() && tournament.toLowerCase().name.includes(search)
-//     );
-//     break;
-// }

@@ -7,8 +7,8 @@ export const TournamentSlice = createSlice({
       {
         id: 1,
         name: "KIA Tournament",
-        startDate: new Date(2022, 10, 1, 14),
-        endDate: new Date(2022, 10, 1, 19),
+        startDate: new Date(2022, 10, 17, 14),
+        endDate: new Date(2022, 10, 17, 19),
         format: "Single",
         location: "MOS",
         court: "Hard",
@@ -22,8 +22,8 @@ export const TournamentSlice = createSlice({
       {
         id: 2,
         name: "Group Tournament",
-        startDate: new Date(2022, 10, 1, 11),
-        endDate: new Date(2022, 10, 1, 20),
+        startDate: new Date(2022, 10, 17, 11),
+        endDate: new Date(2022, 10, 17, 20),
         format: "Team",
         location: "MOS",
         court: "Clay",
@@ -41,8 +41,8 @@ export const TournamentSlice = createSlice({
       {
         id: 3,
         name: "Final Tournament",
-        startDate: new Date(2022, 10, 1, 9),
-        endDate: new Date(2022, 10, 1, 18),
+        startDate: new Date(2022, 10, 17, 9),
+        endDate: new Date(2022, 10, 17, 18),
         format: "Single",
         location: "MOS",
         court: "Hard",
@@ -59,8 +59,8 @@ export const TournamentSlice = createSlice({
       {
         id: 4,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 11),
-        endDate: new Date(2022, 10, 1, 15),
+        startDate: new Date(2022, 10, 17, 11),
+        endDate: new Date(2022, 10, 17, 15),
         format: "Team",
         location: "MOS",
         court: "Clay",
@@ -74,8 +74,8 @@ export const TournamentSlice = createSlice({
       {
         id: 5,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 12),
-        endDate: new Date(2022, 10, 1, 21),
+        startDate: new Date(2022, 10, 17, 12),
+        endDate: new Date(2022, 10, 17, 21),
         format: "Single",
         location: "MOS",
         court: "Clay",
@@ -94,8 +94,8 @@ export const TournamentSlice = createSlice({
       {
         id: 6,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 6),
-        endDate: new Date(2022, 10, 1, 14),
+        startDate: new Date(2022, 10, 17, 6),
+        endDate: new Date(2022, 10, 17, 14),
         format: "Team",
         location: "MOS",
         court: "Hard",
@@ -110,8 +110,8 @@ export const TournamentSlice = createSlice({
       {
         id: 7,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 11),
-        endDate: new Date(2022, 10, 1, 14),
+        startDate: new Date(2022, 10, 17, 11),
+        endDate: new Date(2022, 10, 17, 14),
         format: "Single",
         location: "MOS",
         court: "Clay",
@@ -126,8 +126,8 @@ export const TournamentSlice = createSlice({
       {
         id: 8,
         name: "KIA Tournament",
-        startDate: new Date(2022, 10, 1, 9),
-        endDate: new Date(2022, 10, 1, 11),
+        startDate: new Date(2022, 10, 17, 9),
+        endDate: new Date(2022, 10, 17, 11),
         format: "Single",
         location: "MOS",
         court: "Clay",
@@ -142,8 +142,8 @@ export const TournamentSlice = createSlice({
       {
         id: 9,
         name: "KIA Tournament",
-        startDate: new Date(2022, 10, 1, 14),
-        endDate: new Date(2022, 10, 1, 19),
+        startDate: new Date(2022, 10, 17, 14),
+        endDate: new Date(2022, 10, 17, 19),
         format: "Single",
         location: "MOS",
         court: "Hard",
@@ -158,8 +158,8 @@ export const TournamentSlice = createSlice({
       {
         id: 10,
         name: "Group Tournament",
-        startDate: new Date(2022, 10, 1, 11),
-        endDate: new Date(2022, 10, 1, 20),
+        startDate: new Date(2022, 10, 17, 11),
+        endDate: new Date(2022, 10, 17, 20),
         format: "Team",
         location: "MOS",
         court: "Clay",
@@ -174,8 +174,8 @@ export const TournamentSlice = createSlice({
       {
         id: 11,
         name: "Final Tournament",
-        startDate: new Date(2022, 10, 1, 9),
-        endDate: new Date(2022, 10, 1, 18),
+        startDate: new Date(2022, 10, 17, 9),
+        endDate: new Date(2022, 10, 17, 18),
         format: "Single",
         location: "MOS",
         court: "Hard",
@@ -190,8 +190,8 @@ export const TournamentSlice = createSlice({
       {
         id: 12,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 11),
-        endDate: new Date(2022, 10, 1, 15),
+        startDate: new Date(2022, 10, 17, 11),
+        endDate: new Date(2022, 10, 17, 15),
         format: "Team",
         location: "MOS",
         court: "Clay",
@@ -206,8 +206,8 @@ export const TournamentSlice = createSlice({
       {
         id: 13,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 12),
-        endDate: new Date(2022, 10, 1, 21),
+        startDate: new Date(2022, 10, 17, 12),
+        endDate: new Date(2022, 10, 17, 21),
         format: "Single",
         location: "MOS",
         court: "Clay",
@@ -222,8 +222,8 @@ export const TournamentSlice = createSlice({
       {
         id: 14,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 8),
-        endDate: new Date(2022, 10, 1, 9),
+        startDate: new Date(2022, 10, 17, 8),
+        endDate: new Date(2022, 10, 17, 9),
         format: "Team",
         location: "MOS",
         court: "Hard",
@@ -238,8 +238,8 @@ export const TournamentSlice = createSlice({
       {
         id: 15,
         name: "Semi-Final Tournament",
-        startDate: new Date(2022, 10, 1, 5),
-        endDate: new Date(2022, 10, 1, 10),
+        startDate: new Date(2022, 10, 17, 5),
+        endDate: new Date(2022, 10, 17, 10),
         format: "Single",
         location: "MOS",
         court: "Clay",
@@ -254,8 +254,8 @@ export const TournamentSlice = createSlice({
       {
         id: 16,
         name: "KIA Tournament",
-        startDate: new Date(2022, 10, 1, 9),
-        endDate: new Date(2022, 10, 1, 11),
+        startDate: new Date(2022, 10, 17, 9),
+        endDate: new Date(2022, 10, 17, 11),
         format: "Single",
         location: "MOS",
         court: "Clay",
@@ -270,27 +270,22 @@ export const TournamentSlice = createSlice({
     ],
     filterKeys: {
       text: "",
-      category: "",
+      category: "history",
     },
     tournament: {},
   },
   reducers: {
-    switchCategory: (state, action) => {
-      state.category = action.payload;
-    },
     getTournamentFindById: (state, action) => {
       state.tournament = state.data.find(
         (tournament) => tournament.id == action.payload
       );
     },
     setFilterKeys: (state, action) => {
-      // const { text, category } = action.payload;
-      console.log(action.payload);
-      // state.filterKeys.text = text;
-      // state.filterKeys.category = category;
+      const { text, category } = action.payload;
+      text != undefined ? state.filterKeys.text = text : state.filterKeys.category = category
     },
   },
 });
 export const TournamentReducer = TournamentSlice.reducer;
-export const { switchCategory, searchTournament, getTournamentFindById ,setFilterKeys} =
+export const {  searchTournament, getTournamentFindById ,setFilterKeys} =
   TournamentSlice.actions;

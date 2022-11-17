@@ -1,13 +1,49 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilterKeys } from "../../../../store/tournament";
+import { useEffect } from "react";
 
-const Category = ({ onChangeCategory }) => {
+const Category = () => {
+  const dispatch = useDispatch();
+  const filterKeys = useSelector((state) => state.tournament.filterKeys);
+  const getAllCategory = () => {
+    const allCategoryEl = document.querySelectorAll(".categoryList li");
+    return allCategoryEl;
+  };
+  const cbFuncForAllCategory = (allCategoryEl, callback) => {
+    Array.from(allCategoryEl).map((item) => {
+      callback(item);
+    });
+  };
+  const onChangeCategory = (e) => {
+    const allCategoryEl = getAllCategory();
+    cbFuncForAllCategory(allCategoryEl, (item) => item.classList.remove("active"));
+    e.target.classList.add("active");
+    dispatch(
+      setFilterKeys({ category: e.target.getAttribute("data-category") })
+    );
+  };
+  useEffect(() => {
+    const allCategoryEl = getAllCategory();
+    cbFuncForAllCategory(allCategoryEl, (item) => {
+      if (item.getAttribute("data-category") == filterKeys.category) {
+        item.classList.add("active");
+      }
+    });
+  }, []);
   return (
     <CategoryView>
       <CategoryList className="categoryList">
-        <Categoryİtem className="active" onClick={onChangeCategory}>History</Categoryİtem>
-        <Categoryİtem onClick={onChangeCategory}>Current</Categoryİtem>
-        <Categoryİtem onClick={onChangeCategory}>Upcoming</Categoryİtem>
+        <Categoryİtem onClick={onChangeCategory} data-category="history">
+          History
+        </Categoryİtem>
+        <Categoryİtem onClick={onChangeCategory} data-category="current">
+          Current
+        </Categoryİtem>
+        <Categoryİtem onClick={onChangeCategory} data-category="upcoming">
+          Upcoming
+        </Categoryİtem>
       </CategoryList>
     </CategoryView>
   );

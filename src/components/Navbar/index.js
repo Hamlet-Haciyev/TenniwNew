@@ -62,6 +62,7 @@ const NavbarContainer = styled.nav`
   padding: 20px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   padding-bottom: 70px;
+  min-height: calc(100vh - 66px);
   .ant-btn {
     background-color: #fff;
   }
@@ -90,7 +91,7 @@ const Menu = styled(AntMenu)`
   .ant-menu-title-content {
     display: inline-block;
     height: 40px;
-    line-height:40px;
+    line-height: 40px;
   }
   .ant-menu-item-selected {
     svg {

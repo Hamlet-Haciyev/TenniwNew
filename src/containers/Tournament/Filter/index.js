@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import Search from "./Search";
 import Country from "./Country";
 import Category from "./Category";
-const Filter = ({ onChangeCategory }) => {
+const Filter = () => {
   return (
     <FilterView>
       <Row>
@@ -12,7 +12,7 @@ const Filter = ({ onChangeCategory }) => {
           <Country />
         </Col>
         <Col span={8}>
-          <Category onChangeCategory={onChangeCategory} />
+          <Category />
         </Col>
         <Col span={8}>
           <Search />
