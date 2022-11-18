@@ -2,7 +2,7 @@ import "antd/dist/antd.min.css";
 import Authorized from "./Authorized";
 import UnAuthorized from "./UnAuthorized";
 import { useSelector, useDispatch } from "react-redux";
-
+import "./tailwind.css"
 const App = () => {
   const logAuth = useSelector((state) => state.auth.authHorize);
   console.log(logAuth);

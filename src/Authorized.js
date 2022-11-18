@@ -3,6 +3,7 @@ import Dashboard from "./containers/Dashboard";
 import TournamentDetail from "./containers/Tournament/Detail";
 import { Navbar, Topbar } from "./components";
 import Tournament from "./containers/Tournament"
+import Partner from "./containers/Partner"
 import styled from "styled-components";
 const Authorized = () => {
   return (
@@ -16,6 +17,7 @@ const Authorized = () => {
             <Route path="/statistic" element={<div>statistic</div>} />
             <Route path="/tournament" element={<Tournament />} />
             <Route path="/tournament/:id" element={<TournamentDetail />} />
+            <Route path="/partner" element={<Partner />} />
           </Routes>
         </Content>
       </ContentContainer>
@@ -28,8 +30,6 @@ const ContentContainer = styled.div`
   justify-content: center;
 `;
 const Content = styled.div`
-  padding: 20px 0;
-  margin: 0 auto;
-  min-width: 1140px;
+  width: 100%;
 `;
 export default Authorized;

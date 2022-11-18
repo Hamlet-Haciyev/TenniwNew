@@ -24,10 +24,16 @@ const TournamentDetail = () => {
         </Link>
       </PrevBtn>
       <Info tournamentDetail={tournamentDetail} />
-      <Participants tournamentDetail={tournamentDetail} />
-      {/* <Pending /> */}
-      {/* <Current/> */}
-      <History />
+      <Participants tournamentDetail={tournamentDetail} />.
+      {tournamentDetail &&
+      tournamentDetail.startDate < new Date() &&
+      tournamentDetail.endDate > new Date() ? (
+        <Current />
+      ) : tournamentDetail.endDate < new Date() ? (
+        <History />
+      ) : (
+        <Pending />
+      )}
     </DetailView>
   );
 };

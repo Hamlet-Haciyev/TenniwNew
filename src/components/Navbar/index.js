@@ -18,7 +18,7 @@ const roots = [
   getItem("Dashboard", "/dashboard", <Icon name={"dashboard"} />),
   getItem("Statistic", "/statistic", <Icon name={"statistic"} />),
   getItem("Tournament", "/tournament", <Icon name={"tournament"} />),
-  getItem("Sponsors", "/sponsors", <Icon name={"partner"} />),
+  getItem("Partner", "/partner", <Icon name={"partner"} />),
   getItem("Court", "/court", <Icon name={"bookCourt"} />),
   getItem("Shop", "/shop", <Icon name={"partner"} />),
   getItem("Live", "/live", <Icon name={"live"} />),
@@ -106,75 +106,3 @@ const Menu = styled(AntMenu)`
     width: 26px;
   }
 `;
-//#region Navbar
-// const toggleRef = useRef(null);
-// const navRef = useRef(null);
-// const handleToggle = () => {
-//   toggleRef.current?.addEventListener("click", () => {
-//     if (collapsed) {
-//       navRef.current.classList.remove("close");
-//       setCollapsed(!collapsed);
-//     } else {
-//       navRef.current.classList.add("close");
-//       setCollapsed(!collapsed);
-//     }
-//     console.log(collapsed);
-//   });
-// };
-// New Navbar
-// return (
-//   <nav className="sidebar close" ref={navRef}>
-//     <header ref={toggleRef} onClick={handleToggle}>
-//       <Icon name={"hamburger"} />
-//     </header>
-//     <div className="menu-bar">
-//       <div className="menu">
-//         <ul className="menu-links">
-//           <li className={`nav-link`}>
-//             <Link to="dashboard">
-//               <Icon name={"dashboard"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Dashboard</span>
-//             </Link>
-//           </li>
-//           <li className={`nav-link`}>
-//             <Link to="statistic">
-//               <Icon name={"statistic"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Statistic</span>
-//             </Link>
-//           </li>
-//           <li className={`nav-link`}>
-//             <Link to="tournament">
-//               <Icon name={"tournament"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Tournament</span>
-//             </Link>
-//           </li>
-//           <li className={`nav-link`}>
-//             <Link to="partner">
-//               <Icon name={"partner"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Sponsors</span>
-//             </Link>
-//           </li>
-//           <li className={`nav-link`}>
-//             <Link to="court">
-//               <Icon name={"bookCourt"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Court</span>
-//             </Link>
-//           </li>
-//           <li className={`nav-link`}>
-//             <Link to="shop">
-//               <Icon name={"partner"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Shop</span>
-//             </Link>
-//           </li>
-//           <li className={`nav-link`}>
-//             <Link to="live">
-//               <Icon name={"live"} />
-//               <span className="text nav-text" style={{opacity:collapsed ? 0:1}}>Live</span>
-//             </Link>
-//           </li>
-//         </ul>
-//       </div>
-//     </div>
-//   </nav>
-// );
-//#endregion

@@ -7,38 +7,45 @@ const TournamentList = ({ data }) => {
     {
       title: "Name",
       accessor: "name",
+      key: "name",
     },
     {
       title: "Start Date",
       accessor: "startDate",
+      key: "startDate",
     },
     {
       title: "End Date",
       accessor: "endDate",
+      key: "endDate",
     },
     {
       title: "Format",
       accessor: "format",
+      key: "format",
     },
     {
       title: "Place",
       accessor: "place",
+      key: "place",
     },
     {
       title: "Court",
       accessor: "court",
+      key: "court",
     },
     {
       title: "Payment",
       accessor: "payment",
+      key: "payment",
     },
-    { title: "Rules", accessor: "rules" },
+    { title: "Rules", accessor: "rules", key: "rules" },
   ];
   return (
     <TournamentListContainer>
       <TableHeader>
         {columns.map((column) => {
-          return <TableTitle>{column.title}</TableTitle>;
+          return <TableTitle key={column.key}>{column.title}</TableTitle>;
         })}
       </TableHeader>
       <PaginatedItems itemsPerPage={6} items={data} />

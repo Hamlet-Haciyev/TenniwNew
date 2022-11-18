@@ -15,7 +15,7 @@ export const Button = ({
 }) => {
   return (
     <ButtonStyled
-      borRadius={borradius}
+    borradius={borradius}
       bgcolor={bgcolor}
       color={color}
       width={width}
