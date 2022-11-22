@@ -9,7 +9,12 @@ module.exports = {
         serif: ["ui-serif", "Georgia"],
       },
       colors: {
-        btnblue: "#0066FF",
+        searchBtn: "#0066FF",
+        newPost:
+          "#0098FF",
+      },
+      backgroundImage: {
+        partnerBG: "url('assets/images/partnerBG.png')",
       },
     },
   },

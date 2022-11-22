@@ -7,15 +7,13 @@ import Stats from "./Stats";
 import PrevMatches from "./PrevMatches";
 const Dashboard = () => {
   return (
-    <DashboardContent>
+    <div className="w-[1140px] mx-auto py-10">
       <UpComing />
       <Tournament />
       <Stats />
       <PrevMatches />
-    </DashboardContent>
+    </div>
   );
 };
-const DashboardContent = styled.div`
-  max-width: 1140px;
-`;
+
 export default Dashboard;
