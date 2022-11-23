@@ -186,14 +186,25 @@ const PartnerPage = () => {
     let matchesAge = false;
     let matchesPlayerLevel = false;
     matchesSex = partner.sex == sex;
-    matchesProfilePhotoRequired = partner.profilePhoto == profilePhoto;
+    if (profilePhoto) {
+      matchesProfilePhotoRequired = partner.profilePhoto == profilePhoto;
+    } else {
+      matchesProfilePhotoRequired = true;
+    }
     matchesAge = partner.age >= age.min && partner.age <= age.max;
-    matchesPlayerLevel = partner.playerLevelMin >= playerLevel.min || partner.playerLevelMax <= playerLevel.max;
-    return matchesSex && matchesProfilePhotoRequired && matchesAge && matchesPlayerLevel;
+    matchesPlayerLevel =
+      partner.playerLevelMin >= playerLevel.min ||
+      partner.playerLevelMax <= playerLevel.max;
+    return (
+      matchesSex &&
+      matchesAge &&
+      matchesPlayerLevel &&
+      matchesProfilePhotoRequired
+    );
   };
   useEffect(() => {
     setSort(partners.filter((partner) => displayPartnerForSort(partner)));
-  }, [sex, profilePhoto, age,playerLevel]);
+  }, [sex, profilePhoto, age, playerLevel]);
   return (
     <div className="flex items-center flex-col">
       <div className="flex justify-center items-center w-full h-[300px] relative bg-partnerBG bg-left-bottom bg-no-repeat bg-cover">
@@ -234,14 +245,18 @@ const PartnerPage = () => {
           </Col>
           <Col span={20}>
             <div className="flex flex-col">
-              <div className="flex flex-col">
+              <div className="flex flex-col mb-4">
                 <h4 className="font-[Manrope] font-semibold mb-4 text-2xl">
                   Last time played with
                 </h4>
                 <div className="flex">
                   <div className="flex flex-wrap">
-                    <Partner/>
-                    {sort.length == 0 ? "there is no data for search value......":null}
+                    <Partner />
+                    <Partner />
+                    <Partner />
+                    {sort?.length == 0
+                      ? "there is no data for search value......"
+                      : null}
                     {sort &&
                       sort.map((s) => {
                         return (
@@ -249,6 +264,7 @@ const PartnerPage = () => {
                             <span>age:{s.age}</span>
                             <span>player min level:{s.playerLevelMin}</span>
                             <span>player max level:{s.playerLevelMax}</span>
+                            <span>sex:{s.sex}</span>
                           </div>
                         );
                       })}
@@ -256,11 +272,17 @@ const PartnerPage = () => {
                 </div>
               </div>
               <div className="flex flex-col">
-                <h4 className="text-2xl font-[Manrope] font-semibold">
+                <h4 className="text-2xl font-[Manrope] font-semibold mb-4">
                   Recommended
                 </h4>
-                <div className="flex">
-                  <div className="">partner</div>
+                <div className="flex items-center flex-wrap">
+                  <Partner />
+                  <Partner />
+                  <Partner />
+                  <Partner />
+                  <Partner />
+                  <Partner />
+                  <Partner />
                 </div>
               </div>
             </div>

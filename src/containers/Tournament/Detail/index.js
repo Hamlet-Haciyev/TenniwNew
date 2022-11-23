@@ -39,6 +39,8 @@ const TournamentDetail = () => {
 };
 const DetailView = styled.div`
   max-width: 1160px;
+  margin: 0 auto ;
+  padding-top: 40px;
 `;
 const PrevBtn = styled.button`
   background: #ffffff;
