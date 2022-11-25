@@ -1,21 +1,20 @@
-import { Progress } from "antd";
-import { red, green, yellow } from "@ant-design/colors";
 import React from "react";
 import profile from "../../assets/images/partner.png";
 import Icon from "../../helpers/icons";
-export const Partner = () => {
+import { LevelBar } from "../../components";
+export const Partner = ({ partner }) => {
   return (
-    <div className="flex flex-col items-center rounded-xl border-2 border-[#CFD3D9] w-[260px] cursor-pointer py-5 px-6 mr-3 mb-4">
+    <div className="flex flex-col items-center rounded-xl shadow-[0px_8px_17px_rgba(67,67,67,0.09)] border-2 border-[#CFD3D9] w-[260px] cursor-pointer py-5 px-6 mr-3 mb-4">
       <div className="flex items-center mb-4 w-full">
         <div className="flex rounded-full border-5 border-[#000] mr-2">
           <img src={profile} alt={"partner"} />
         </div>
         <div className="flex flex-col">
           <h5 className="text-lg font-[Manrope] text-[#0066FF] ">
-            Bulat Peters
+            {partner?.name}
           </h5>
           <span className="text-sm font-[Manrope] text-[#545454]">
-            26 years, Baku
+            {partner?.age} years, Baku
           </span>
         </div>
       </div>
@@ -53,29 +52,24 @@ export const Partner = () => {
         <span className="w-full">Mon, Wed, Sun: 19:00 - 21:00 </span>
       </div>
       <div className="flex flex-col items-center w-full mb-3">
-        <h5 className="text-[#212731] font-Manrope font-semibold w-full">
+        <h5 className="text-[#212731] font-Manrope font-semibold w-full mb-6">
           Player’s level
         </h5>
         <span className="w-full">
-          <Progress
-            steps={10}
-            strokeColor={[]}
-            showInfo={false}
-            trailColor={"#D3D3D3"}
+          <LevelBar
+            min={partner?.playerLevelMin}
+            max={partner?.playerLevelMax}
           />
         </span>
       </div>
       <div className="flex flex-col items-center w-full mb-3">
-        <h5 className="text-[#212731] font-Manrope font-semibold w-full">
+        <h5 className="text-[#212731] font-Manrope font-semibold w-full mb-6">
           Want to play with
         </h5>
         <span className="w-full">
-          <Progress
-            percent={60}
-            steps={10}
-            strokeColor={[]}
-            showInfo={false}
-            trailColor={"#D3D3D3"}
+          <LevelBar
+            min={partner?.playerLevelMin}
+            max={partner?.playerLevelMax}
           />
         </span>
       </div>

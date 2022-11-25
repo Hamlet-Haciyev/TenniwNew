@@ -8,3 +8,4 @@ export { Progress } from "./Progress";
 export { StepCustom } from "./Step";
 export { Participant } from "./Participant";
 export { Partner } from "./Partner";
+export { LevelBar } from "./Levelbar";

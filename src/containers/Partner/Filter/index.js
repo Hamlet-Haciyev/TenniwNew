@@ -1,42 +1,16 @@
 import React, { useState } from "react";
 import Slider from "./Slider";
 import { Radio, Checkbox, Space } from "antd";
-import { useEffect } from "react";
 const Filter = ({
   onChangeCourtPayment,
   onChangeGameType,
   onChangeSex,
   onChangeProfilePhotoIsRequired,
-  sex,
-  setAge,
-  setPlayerLevel,
+  selectedSex,
+  onChangeAge,
+  onChangePlayerLevel,
 }) => {
-  // const [sex, setSex] = useState("male");
-  // const [profilePhoto, setProfilePhoto] = useState(false);
-  // const [age, setAge] = useState({ min: 0, max: 100 });
-  // const [gameLevel, setGameLevel] = useState({ min: 1, max: 7 });
-  // const [gameType, setGameType] = useState([]);
-  // const [courtType, setCourtType] = useState([]);
-  // const onChangeSex = (e) => {
-  //   setSex(e.target.value);
-  // };
-  // const onChangeProfilePhotoIsRequired = () => {
-  //   setProfilePhoto(!profilePhoto);
-  // };
-  // const onChangeGameType = (e) => {
-  //   setGameType(e)
-  // };
-  // const onChangeCourtPayment = (e) => {
-  //   setCourtType(e)
-  // };
-  const onChangeAge = (value) => {
-    const [min, max] = value;
-    setAge({ min, max });
-  };
-  const onChangePlayerLevel = (value) => {
-    const [min, max] = value;
-    setPlayerLevel({ min, max });
-  };
+
   const gameTypeOptions = [
     "Single",
     "Partner",
@@ -51,7 +25,7 @@ const Filter = ({
       </h5>
       <div className="flex flex-col mb-4">
         <h5 className="text-black font-semibold text-md mb-1">Sex</h5>
-        <Radio.Group onChange={onChangeSex} value={sex}>
+        <Radio.Group onChange={onChangeSex} value={selectedSex}>
           <Space direction="vertical">
             <Radio value={"male"}>Male</Radio>
             <Radio value={"female"}>Female</Radio>
@@ -100,15 +74,10 @@ const Filter = ({
           onChange={onChangeCourtPayment}
         />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col" >
         <h5 className="text-black font-semibold text-md mb-1">When</h5>
         <Checkbox>Weekdays</Checkbox>
-        <Slider
-          range
-          defaultValue={[7, 23]}
-          min={7}
-          max={23}
-        />
+        <Slider range defaultValue={[7, 23]} min={7} max={23} />
         <Checkbox>Weekend</Checkbox>
         <Slider
           range
@@ -117,9 +86,6 @@ const Filter = ({
           max={23}
         />
       </div>
-      <button className="flex items-center justify-center w-full h-10 rounded-md text-white bg-[#0066FF] mt-4">
-        Apply
-      </button>
     </div>
   );
 };
