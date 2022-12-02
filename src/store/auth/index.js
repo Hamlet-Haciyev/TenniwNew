@@ -9,7 +9,7 @@ export const updateAuthhorize = createAsyncThunk(
   }
 );
 export const AuthSlice = createSlice({
-  name: "counter",
+  name: "auth",
   initialState: {
     authHorize: false,
   },

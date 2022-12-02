@@ -35,7 +35,7 @@ const Tournament = () => {
   }, [filterKeys]);
 
   return (
-    <div className="w-[1200px] mx-auto pt-10">
+    <div className="w-[1140px] mx-auto pt-10">
       <Filter />
       {data.length == 0 ? "there is no data for search value..." : <TournamentList data={data} />}
     </div>

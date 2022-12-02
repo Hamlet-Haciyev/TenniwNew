@@ -23,8 +23,8 @@ const Pending = () => {
         Pending: <Count>{pendings.length}</Count>
       </Title>
       <ParticipantList>
-        {pendings.map((pending) => {
-          return <Participant name={pending.name} power={pending.power} />;
+        {pendings.map((pending,index) => {
+          return <Participant key={index} name={pending.name} power={pending.power} />;
         })}
       </ParticipantList>
     </PendingView>

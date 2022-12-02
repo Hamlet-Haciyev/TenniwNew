@@ -10,8 +10,8 @@ module.exports = {
       },
       colors: {
         searchBtn: "#0066FF",
-        newPost:
-          "#0098FF",
+        newPost: "#0098FF",
+        overlay:"rgba(52, 52, 52, 0.68)"
       },
       backgroundImage: {
         partnerBG: "url('assets/images/partnerBG.png')",

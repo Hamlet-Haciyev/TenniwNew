@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import Slider from "./Slider";
 import { Radio, Checkbox, Space } from "antd";
 const Filter = ({
+  selectedSex,
   onChangeCourtPayment,
   onChangeGameType,
   onChangeSex,
-  onChangeProfilePhotoIsRequired,
-  selectedSex,
+  onChangeIsRequiredPhoto,
   onChangeAge,
   onChangePlayerLevel,
 }) => {
-
   const gameTypeOptions = [
     "Single",
     "Partner",
@@ -35,7 +34,7 @@ const Filter = ({
       </div>
       <div className="flex flex-col mb-4">
         <h5 className="text-black font-semibold text-md mb-1">Profile Photo</h5>
-        <Checkbox onChange={onChangeProfilePhotoIsRequired}>Required</Checkbox>
+        <Checkbox onChange={onChangeIsRequiredPhoto}>Required</Checkbox>
       </div>
       <div className="flex flex-col mb-4">
         <h5 className="text-black font-semibold text-md mb-1">Age</h5>
@@ -52,9 +51,9 @@ const Filter = ({
         <h5 className="text-black font-semibold text-md mb-1">Game Level</h5>
         <Slider
           range
-          defaultValue={[1, 7]}
+          defaultValue={[1, 10]}
           min={1}
-          max={7}
+          max={10}
           onChange={onChangePlayerLevel}
         />
       </div>

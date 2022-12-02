@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import profile from "../../assets/images/partner.png";
 import Icon from "../../helpers/icons";
 import { LevelBar } from "../../components";
-export const Partner = ({ partner }) => {
+export const Partner = ({ partner, onClick }) => {
   return (
-    <div className="flex flex-col items-center rounded-xl shadow-[0px_8px_17px_rgba(67,67,67,0.09)] border-2 border-[#CFD3D9] w-[260px] cursor-pointer py-5 px-6 mr-3 mb-4">
+    <div
+      onClick={onClick}
+      className="flex flex-col items-center rounded-xl shadow-[0px_8px_17px_rgba(67,67,67,0.09)] border-2 border-[#CFD3D9] w-[260px] cursor-pointer py-5 px-6 mr-3 mb-4"
+    >
       <div className="flex items-center mb-4 w-full">
         <div className="flex rounded-full border-5 border-[#000] mr-2">
           <img src={profile} alt={"partner"} />
@@ -18,25 +21,39 @@ export const Partner = ({ partner }) => {
           </span>
         </div>
       </div>
-      <div className="flex items-center justify-between w-full mb-3 px-4">
+      <div className="flex items-center justify-evenly w-full mb-3">
         <div className="flex items-center">
-          <span className="mr-2">
-            <Icon name="single" />
-          </span>
-          <span className="text-[#212731] text-lg font-semibold">&</span>
-          <span className="ml-2">
-            <Icon name="team" />
-          </span>
+          {partner.gametype?.includes("Single") ? (
+            <span className="mr-2">
+              <Icon name="single" />
+            </span>
+          ) : null}
+          {partner.gametype.includes("Partner") &&
+          partner.gametype.includes("Single") ? (
+            <span className="text-[#212731] text-lg font-semibold">&</span>
+          ) : null}
+          {partner.gametype?.some((gm) => gm.includes("Partner")) ? (
+            <span className="ml-2">
+              <Icon name="team" />
+            </span>
+          ) : null}
         </div>
         |
         <div className="flex items-center">
-          <span className="mr-2">
-            <Icon name="score" />
-          </span>
-          <span className="text-[#212731] text-lg font-semibold">&</span>
-          <span className="ml-2">
-            <Icon name="nonScore" />
-          </span>
+          {partner.gametype?.includes("Score System") ? (
+            <span className="mr-2">
+              <Icon name="score" />
+            </span>
+          ) : null}
+          {partner.gametype.includes("Score System") &&
+          partner.gametype.includes("No Score System") ? (
+            <span className="text-[#212731] text-lg font-semibold">&</span>
+          ) : null}
+          {partner.gametype?.some((gm) => gm.includes("No Score System")) ? (
+            <span className="ml-2">
+              <Icon name="nonScore" />
+            </span>
+          ) : null}
         </div>
       </div>
       <div className="flex flex-col items-center w-full mb-3">
@@ -56,10 +73,7 @@ export const Partner = ({ partner }) => {
           Player’s level
         </h5>
         <span className="w-full">
-          <LevelBar
-            min={partner?.playerLevelMin}
-            max={partner?.playerLevelMax}
-          />
+          <LevelBar min={partner?.levelMin} max={partner?.levelMax} />
         </span>
       </div>
       <div className="flex flex-col items-center w-full mb-3">
@@ -67,10 +81,7 @@ export const Partner = ({ partner }) => {
           Want to play with
         </h5>
         <span className="w-full">
-          <LevelBar
-            min={partner?.playerLevelMin}
-            max={partner?.playerLevelMax}
-          />
+          <LevelBar min={partner?.levelMin} max={partner?.levelMax} />
         </span>
       </div>
       <div className="flex items-center justify-between w-full">

@@ -2,9 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "./containers/Dashboard";
 import TournamentDetail from "./containers/Tournament/Detail";
 import { Navbar, Topbar } from "./components";
-import Tournament from "./containers/Tournament"
-import PartnerPage from "./containers/Partner"
+import Tournament from "./containers/Tournament";
+import PartnerPage from "./containers/Partner";
 import styled from "styled-components";
+import AddPartner from "./containers/Partner/AddPartner";
 const Authorized = () => {
   return (
     <AuthorizedContainer>
@@ -18,6 +19,7 @@ const Authorized = () => {
             <Route path="/tournament" element={<Tournament />} />
             <Route path="/tournament/:id" element={<TournamentDetail />} />
             <Route path="/partner" element={<PartnerPage />} />
+            <Route path="/partner/addpost" element={<AddPartner />} />
           </Routes>
         </Content>
       </ContentContainer>

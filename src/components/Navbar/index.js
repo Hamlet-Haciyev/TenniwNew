@@ -63,6 +63,7 @@ const NavbarContainer = styled.nav`
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   padding-bottom: 70px;
   min-height: calc(100vh - 66px);
+  border-right: 1px solid #e8e8e8;
   .ant-btn {
     background-color: #fff;
   }
