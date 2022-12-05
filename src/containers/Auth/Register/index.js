@@ -1,74 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Col, Row, Select, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {
-  FormItem,
-  // InputPassword,
-  Button,
-  StepCustom,
-} from "../../../components";
 import Icon from "../../../helpers/icons";
-import {
-  emailRule,
-  min6CharactersRule,
-  mobilePrefixRule,
-} from "../../../utils/checkValidation";
-import { updateAuthhorize } from "../../../store/auth";
-import { useDispatch } from "react-redux";
 import LoginImg from "../../../assets/images/login.png";
-import ClockCircleOutlined from "@ant-design/icons/ClockCircleOutlined";
-import { addUserInfo } from "../../../store/user";
-import { Carousel, CarouselItem } from "./form";
-import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import {
+  Formik,
+  useFormik,
+  Field,
+  ErrorMessage,
+  yupToFormErrors,
+} from "formik";
+import MultiStepForm, { FormStep } from "./MultiStepForm";
+
 const Register = () => {
-  const { register, handleSubmit } = useForm();
-  // const [formData, setFormData] = useState([]);
-  const navigate = useNavigate();
-  // const [form] = Form.useForm();
-  // const dispatch = useDispatch();
-  // const { Option } = Select;
-
-  // useEffect(() => {
-  //   if (formData) {
-  //     // form.setFieldsValue({
-  //     //   fname: formData[0]?.fname,
-  //     //   surname: formData[0]?.surname,
-  //     //   email: formData[0]?.email,
-  //     //   phone: formData[0]?.phone,
-  //     //   password: formData[0]?.password,
-  //     //   question: formData[0]?.question,
-  //     //   answer: formData[0]?.answer,
-  //     // });
-  //     // form.setFieldsValue({
-  //     //   fname: "formData[0].fname",
-  //     //   surname: "formData[0].surname",
-  //     //   email: "formData[0].email",
-  //     //   phone: "formData[0].phone",
-  //     //   password: "formData[0].password",
-  //     //   question: "formData[0].question",
-  //     //   answer: "formData[0].answer",
-  //     // });
-  //   }
-  // }, []);
-
-  // const onFinish = (values) => {
-  //   console.log(values);
-  //   setFormData([values]);
-  // };
-  const [current, setCurrent] = useState(0);
-  const next = (e) => {
-    e.preventDefault();
-    setCurrent(current + 1);
-    // if (current == 2) {
-    //   setCurrent(0);
-    //   navigate("/login");
-    // }
-  };
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
-
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("Name is required"),
+    lastName: Yup.string().required("Surname is required"),
+  });
   return (
     <AuthLayout>
       <Row>
@@ -93,85 +43,94 @@ const Register = () => {
                 <div className="h-[100px] mb-10">
                   Step by Step Register (Progress)
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  {current == 0 ? (
-                    <div className="flex">
-                      <div className="flex flex-col">
-                        <label
-                          className="font-[Manrope] text-[#585858] text-sm"
-                          htmlFor="firstname"
-                        >
-                          Firstname
-                        </label>
-                        <input
-                          className="rounded-md px-3 pt-2 border border-blue mx-1"
-                          {...register("firstname")}
-                          id="firstname"
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label
-                          className="font-[Manrope] text-[#585858] text-sm"
-                          htmlFor="lastname"
-                        >
-                          Lastname
-                        </label>
-                        <input
-                          className="rounded-md px-3 pt-2 border border-blue mx-1"
-                          {...register("lastname")}
-                          id="lastname"
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex">
-                      <div className="flex flex-col">
-                        <label
-                          className="font-[Manrope] text-[#585858] text-sm"
-                          htmlFor="email"
-                        >
-                          email
-                        </label>
-                        <input
-                          className="rounded-md px-3 pt-2 border border-blue mx-1"
-                          {...register("email")}
-                          id="email"
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label
-                          className="font-[Manrope] text-[#585858] text-sm"
-                          htmlFor="phone"
-                        >
-                          phone number
-                        </label>
-                        <input
-                          className="rounded-md px-3 pt-2 border border-blue mx-1"
-                          {...register("phonenumber")}
-                          id="phone"
-                        />
-                      </div>
-                    </div>
-                  )}
-                  <div className="flex items-center justify-between pt-10">
-                    <p className="font-Manrope] text-[#58585] text-md">
-                      Already have an account?
-                      <Link to={"/login"} className="text-[#0067FF] ml-2">Log in</Link>
-                    </p>
-                    {current == 0 ? (
-                      <button
-                        onClick={next}
-                        className="flex items-center justify-center text-white rounded-md py-2 px-5 bg-[#0067FF]"
+                <MultiStepForm
+                  initialValues={{
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phone: "",
+                  }}
+                  onSubmit={(values) => {
+                    alert(JSON.stringify(values, null, 2));
+                  }}
+                >
+                  <FormStep
+                    stepName="Basic Info"
+                    onSubmit={() => console.log("step1 submit")}
+                    validationSchema={validationSchema}
+                  >
+                    <div className="flex flex-col">
+                      <label
+                        className="font-[Manrope] text-[#585858] text-md"
+                        htmlFor="name"
                       >
-                        Next
-                      </button>
-                    ) : (
-                      <button className="flex items-center justify-center text-white rounded-md py-2 px-5 bg-[#0067FF]">
-                        Submit
-                      </button>
-                    )}
-                  </div>
-                </form>
+                        Name
+                      </label>
+                      <Field
+                        type="text"
+                        name="firstName"
+                        placeholder="Name"
+                        id="name"
+                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1 outline-none"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label
+                        className="font-[Manrope] text-[#585858] text-md"
+                        htmlFor="surname"
+                      >
+                        Surname
+                      </label>
+                      <Field
+                        id="surname"
+                        type="text"
+                        name="lastName"
+                        placeholder="Surname"
+                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1 outline-none"
+                      />
+                    </div>
+                  </FormStep>
+                  <FormStep
+                    stepName="Security"
+                    onSubmit={() => console.log("step2 submit")}
+                    validationSchema={Yup.object({
+                      email: Yup.string().email().required(),
+                      phone: Yup.number().required(),
+                    })}
+                  >
+                    <div className="flex flex-col">
+                      <label
+                        className="font-[Manrope] text-[#585858] text-md"
+                        htmlFor="email"
+                      >
+                        Email
+                      </label>
+                      <Field
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        id="email"
+                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1"
+                      />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <label
+                        className="font-[Manrope] text-[#585858] text-md"
+                        htmlFor="phone"
+                      >
+                        Phone
+                      </label>
+                      <Field
+                        type="number"
+                        name="phone"
+                        placeholder="Phone"
+                        id="phone"
+                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1 mx-2"
+                      />
+                    </div>
+                  </FormStep>
+                </MultiStepForm>
               </div>
             </RegisterContainer>
           </RegisterWrapper>
@@ -189,9 +148,7 @@ const RegisterContainer = styled.div`
   margin: 0 auto;
   padding: 60px 0;
 `;
-const RegisterView = styled.div`
-  padding: 30px;
-`;
+
 const AuthLayout = styled.div`
   height: 100vh;
   overflow: hidden;
@@ -225,75 +182,7 @@ const GoBackLink = styled.div`
     }
   }
 `;
-const RegisterHead = styled.h2`
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 31px;
-  line-height: 55px;
-  color: #000000;
-  margin-bottom: 40px;
-`;
-const NextSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-  p {
-    font-family: "Manrope";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 27px;
-    color: #585858;
-    margin-bottom: 0;
-    a {
-      margin-left: 5px;
-    }
-  }
-`;
-const StepsWrapper = styled.div`
-  margin-bottom: 30px;
-`;
-const PasswordRequirements = styled.div`
-  margin-top: 30px;
-`;
-const RequirementDescription = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 15px;
-`;
-const RequirementCriteria = styled.span`
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #219040;
-  margin-bottom: 10px;
-  width: 200px;
-  white-space: nowrap;
-  svg {
-    margin-right: 5px;
-  }
-`;
-const RequirementHead = styled.h4`
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  color: #585858;
-`;
-const SecurityQuestionText = styled.p`
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 22px;
-  color: #666666;
-`;
+
 export default Register;
 //#region Sing up (old)
 {
@@ -512,5 +401,93 @@ export default Register;
                   </Form>
                 </StepsWrapper>
               </RegisterView> */
+}
+//#endregion
+//#region yup and react-hook-form
+// const {
+//   register,
+//   handleSubmit,
+//   formState: { errors, isValid },
+// } = useForm({
+//   mode: "all",
+//   resolver: yupResolver(schema),
+// });
+{
+  /* <form onSubmit={handleSubmit(onSubmit)}>
+{current == 0 ? (
+  <div className="flex">
+    <div className="flex flex-col">
+      <label
+        className="font-[Manrope] text-[#585858] text-sm"
+        htmlFor="firstname"
+      >
+        Firstname
+      </label>
+      <input
+        className="rounded-md px-3 pt-2 border border-blue mx-1"
+        {...register("firstname")}
+        id="firstname"
+      />
+      <p>{errors.firstname?.message}</p>
+    </div>
+    <div className="flex flex-col">
+      <label
+        className="font-[Manrope] text-[#585858] text-sm"
+        htmlFor="lastname"
+      >
+        Lastname
+      </label>
+      <input
+        className="rounded-md px-3 pt-2 border border-blue mx-1"
+        {...register("lastname")}
+        id="lastname"
+      />
+    </div>
+  </div>
+) : (
+  <div className="flex">
+    <div className="flex flex-col">
+      <label
+        className="font-[Manrope] text-[#585858] text-sm"
+        htmlFor="email"
+      >
+        email
+      </label>
+      <input
+        className="rounded-md px-3 pt-2 border border-blue mx-1"
+        {...register("email")}
+        id="email"
+      />
+      {errors.email && (
+        <p className="text-red-600 text-sm mt-2">
+          {errors.email?.message}
+        </p>
+      )}
+    </div>
+    <div className="flex flex-col">
+      <label
+        className="font-[Manrope] text-[#585858] text-sm"
+        htmlFor="phone"
+      >
+        phone number
+      </label>
+      <input
+        className="rounded-md px-3 pt-2 border border-blue mx-1"
+        {...register("phonenumber")}
+        id="phone"
+      />
+    </div>
+  </div>
+)}
+<div className="flex items-center justify-between pt-10">
+  <p className="font-Manrope] text-[#58585] text-md">
+    Already have an account?
+    <Link to={"/login"} className="text-[#0067FF] ml-2">
+      Log in
+    </Link>
+  </p>
+  {renderButton()}
+</div>
+</form> */
 }
 //#endregion
