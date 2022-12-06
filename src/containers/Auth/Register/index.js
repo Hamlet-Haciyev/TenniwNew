@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Row, Select, Input } from "antd";
+import { Form, Col, Row, Select, Input, Steps } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Icon from "../../../helpers/icons";
@@ -18,6 +18,8 @@ const Register = () => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Name is required"),
     lastName: Yup.string().required("Surname is required"),
+    email: Yup.string().email().required(),
+    phone: Yup.number("only number").required(),
   });
   return (
     <AuthLayout>
@@ -41,7 +43,7 @@ const Register = () => {
                   Create an account
                 </h2>
                 <div className="h-[100px] mb-10">
-                  Step by Step Register (Progress)
+                  {/* <Steps current={current} items={steps}/> */}
                 </div>
                 <MultiStepForm
                   initialValues={{
@@ -49,6 +51,10 @@ const Register = () => {
                     lastName: "",
                     email: "",
                     phone: "",
+                    password: "",
+                    confirmPassword: "",
+                    question: "",
+                    answer: "",
                   }}
                   onSubmit={(values) => {
                     alert(JSON.stringify(values, null, 2));
@@ -59,75 +65,164 @@ const Register = () => {
                     onSubmit={() => console.log("step1 submit")}
                     validationSchema={validationSchema}
                   >
-                    <div className="flex flex-col">
-                      <label
-                        className="font-[Manrope] text-[#585858] text-md"
-                        htmlFor="name"
-                      >
-                        Name
-                      </label>
-                      <Field
-                        type="text"
-                        name="firstName"
-                        placeholder="Name"
-                        id="name"
-                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1 outline-none"
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <label
-                        className="font-[Manrope] text-[#585858] text-md"
-                        htmlFor="surname"
-                      >
-                        Surname
-                      </label>
-                      <Field
-                        id="surname"
-                        type="text"
-                        name="lastName"
-                        placeholder="Surname"
-                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1 outline-none"
-                      />
+                    <div className="flex flex-col mb-16">
+                      <div className="flex justify-between mb-8">
+                        <div className="flex flex-col mr-5 w-[50%]">
+                          <label
+                            className="font-[Manrope] text-[#585858] text-md mb-3"
+                            htmlFor="name"
+                          >
+                            Name
+                          </label>
+                          <Field
+                            type="text"
+                            name="firstName"
+                            placeholder="Mark"
+                            id="name"
+                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                          />
+                        </div>
+                        <div className="flex flex-col w-[50%]">
+                          <label
+                            className="font-[Manrope] text-[#585858] text-md mb-3"
+                            htmlFor="surname"
+                          >
+                            Surname
+                          </label>
+                          <Field
+                            id="surname"
+                            type="text"
+                            name="lastName"
+                            placeholder="Thomas"
+                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex justify-between">
+                        <div className="flex flex-col mr-5 w-[50%]">
+                          <label
+                            className="font-[Manrope] text-[#585858] text-md mb-3"
+                            htmlFor="email"
+                          >
+                            Email
+                          </label>
+                          <Field
+                            type="email"
+                            name="email"
+                            placeholder="mark@example.com"
+                            id="email"
+                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                          />
+                        </div>
+                        <div className="flex flex-col w-[50%]">
+                          <label
+                            className="font-[Manrope] text-[#585858] text-md mb-3"
+                            htmlFor="phone"
+                          >
+                            Phone
+                          </label>
+                          <Field
+                            type="text"
+                            name="phone"
+                            placeholder="XX XXX XX XX"
+                            id="phone"
+                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </FormStep>
                   <FormStep
                     stepName="Security"
                     onSubmit={() => console.log("step2 submit")}
                     validationSchema={Yup.object({
-                      email: Yup.string().email().required(),
-                      phone: Yup.number().required(),
+                      password: Yup.string().min(4).max(15).required(),
+                      confirmPassword: Yup.string().oneOf([
+                        Yup.ref("password"),
+                        null,
+                      ]),
                     })}
                   >
-                    <div className="flex flex-col">
-                      <label
-                        className="font-[Manrope] text-[#585858] text-md"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <Field
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        id="email"
-                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1"
-                      />
+                    <div className="flex mb-16">
+                      <div className="flex flex-col w-[50%] mr-5">
+                        <label
+                          className="font-[Manrope] text-[#585858] text-md mb-3"
+                          htmlFor="password"
+                        >
+                          Password
+                        </label>
+                        <Field
+                          type="password"
+                          name="password"
+                          placeholder="**********"
+                          id="password"
+                          className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col w-[50%]">
+                        <label
+                          className="font-[Manrope] text-[#585858] text-md mb-3"
+                          htmlFor="confirmPsw"
+                        >
+                          Repeat Password
+                        </label>
+                        <Field
+                          type="password"
+                          name="confirmPassword"
+                          placeholder="**********"
+                          id="confirmPsw"
+                          className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                        />
+                      </div>
                     </div>
-
-                    <div className="flex flex-col">
-                      <label
-                        className="font-[Manrope] text-[#585858] text-md"
-                        htmlFor="phone"
-                      >
-                        Phone
-                      </label>
-                      <Field
-                        type="number"
-                        name="phone"
-                        placeholder="Phone"
-                        id="phone"
-                        className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md px-2 py-1 mx-2"
-                      />
+                  </FormStep>
+                  <FormStep
+                    stepName="Security"
+                    onSubmit={() => console.log("step3 submit")}
+                    validationSchema={Yup.object({
+                      question: Yup.string().required(),
+                      answer: Yup.string().required(),
+                    })}
+                  >
+                    <div className="flex flex-col mb-16">
+                      <div className="flex flex-col mb-4">
+                        <label
+                          className="font-[Manrope] text-[#585858] text-md mb-3"
+                          htmlFor="password"
+                        >
+                          Recovery Question
+                        </label>
+                        <Field
+                          component="select"
+                          type="text"
+                          name="question"
+                          placeholder="question"
+                          id="question"
+                          className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-2 outline-none"
+                        >
+                          <option value="Where did you go on your first flight?">
+                            “Where did you go on your first flight?”
+                          </option>
+                          <option value="SF">San Francisco</option>
+                          <option value="CH">Chicago</option>
+                          <option value="OTHER">Other</option>
+                        </Field>
+                      </div>
+                      <div className="flex flex-col mb-4">
+                        <label
+                          className="font-[Manrope] text-[#585858] text-md mb-3"
+                          htmlFor="answer"
+                        >
+                          Answer
+                        </label>
+                        <Field
+                          type="text"
+                          name="answer"
+                          placeholder="Answer"
+                          id="answer"
+                          className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                        />
+                      </div>
                     </div>
                   </FormStep>
                 </MultiStepForm>
