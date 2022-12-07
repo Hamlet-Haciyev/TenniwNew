@@ -1,22 +1,8 @@
-import { Steps } from "antd";
 import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useMultistepForm } from "../../../../hooks/useMultistepForm";
-const items = [
-  {
-    key: "Basic Info",
-    title: "Basic Info",
-  },
-  {
-    key: "Security",
-    title: "Security",
-  },
-  {
-    key: "Recovery question",
-    title: "Recovery question",
-  },
-];
+
 const MultiStepForm = ({ children, initialValues, onSubmit }) => {
   const steps = React.Children.toArray(children);
   const { next, snapshot, step, isLastStep, currentStepIndex } =
@@ -32,20 +18,18 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
     }
   };
   return (
-    <>
-      <Steps current={currentStepIndex} items={items} />
+    <div className="pt-20">
       <Formik
         initialValues={snapshot}
         onSubmit={handleSubmit}
         validationSchema={step.props.validationSchema}
       >
-        {(formik, errors) => (
+        {(formik) => (
           <Form onSubmit={formik.handleSubmit}>
-            {console.log(errors)}
             {step}
             <div className="flex justify-between items-center">
               <p className="font-[Manrope] text-md text-[#585858]">
-                Already have an account?{" "}
+                Already have an account?
                 <Link to={"/login"} className="text-[#0067FF]">
                   Log In
                 </Link>
@@ -60,7 +44,7 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
           </Form>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 export const FormStep = ({ stepName = "", children }) => children;

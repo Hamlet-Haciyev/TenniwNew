@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Col, Row, Select, Input, Steps } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Col, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Icon from "../../../helpers/icons";
@@ -13,7 +13,9 @@ import {
   yupToFormErrors,
 } from "formik";
 import MultiStepForm, { FormStep } from "./MultiStepForm";
-
+import { Steps } from "../../../components";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 const Register = () => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Name is required"),
@@ -21,6 +23,40 @@ const Register = () => {
     email: Yup.string().email().required(),
     phone: Yup.number("only number").required(),
   });
+  const [value, setValue] = useState();
+  const [atLeast8Character, setAtLeast8Character] = useState(false);
+  const [hasUppercaseCharacter, sethasUppercaseCharacter] = useState(false);
+  const [hasLowercaseCharacter, sethasLowercaseCharacter] = useState(false);
+  const [hasNumber, sethasNumber] = useState(false);
+  const [hasSpecialCharacter, sethasSpecialCharacter] = useState(false);
+  const checkPasswordValidation = (psw) => {
+    if (psw.trim().length >= 8) {
+      setAtLeast8Character(true);
+    } else {
+      setAtLeast8Character(false);
+    }
+    if (/(?=.*[A-Z])/g.test(psw)) {
+      sethasUppercaseCharacter(true);
+    } else {
+      sethasUppercaseCharacter(false);
+    }
+    if (/(?=.*[a-z])/g.test(psw)) {
+      sethasLowercaseCharacter(true);
+    } else {
+      sethasLowercaseCharacter(false);
+    }
+    if (/(?=.*[0-9])/g.test(psw)) {
+      sethasNumber(true);
+    } else {
+      sethasNumber(false);
+    }
+    if (/(?=.*[-+_!@#$%^&*., ?])/g.test(psw)) {
+      sethasSpecialCharacter(true);
+    } else {
+      sethasSpecialCharacter(false);
+    }
+  };
+
   return (
     <AuthLayout>
       <Row>
@@ -39,11 +75,11 @@ const Register = () => {
                 </Link>
               </GoBackLink>
               <div className="">
-                <h2 className="font-[Manrope] font-semibold text-[#000000] text-3xl mb-10">
+                <h2 className="font-[Manrope] font-semibold text-[#000000] text-3xl my-10">
                   Create an account
                 </h2>
-                <div className="h-[100px] mb-10">
-                  {/* <Steps current={current} items={steps}/> */}
+                <div className="">
+                  <Steps />
                 </div>
                 <MultiStepForm
                   initialValues={{
@@ -121,6 +157,15 @@ const Register = () => {
                           >
                             Phone
                           </label>
+                          {/* <PhoneInput
+                            international
+                            defaultCountry="AZ"
+                            placeholder="Enter phone number"
+                            value={value}
+                            onChange={setValue}
+                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
+                            name="phone"
+                           /> */}
                           <Field
                             type="text"
                             name="phone"
@@ -152,6 +197,7 @@ const Register = () => {
                           Password
                         </label>
                         <Field
+                          validate={checkPasswordValidation}
                           type="password"
                           name="password"
                           placeholder="**********"
@@ -162,7 +208,7 @@ const Register = () => {
                       <div className="flex flex-col w-[50%]">
                         <label
                           className="font-[Manrope] text-[#585858] text-md mb-3"
-                          htmlFor="confirmPsw"
+                          htmlFor="confirmPassword"
                         >
                           Repeat Password
                         </label>
@@ -170,10 +216,60 @@ const Register = () => {
                           type="password"
                           name="confirmPassword"
                           placeholder="**********"
-                          id="confirmPsw"
+                          id="confirmPassword"
                           className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
                         />
                       </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <h5 className="font-[Manrope] text-[#585858] text-md mb-5">
+                        Your password must be contain:
+                      </h5>
+                      <ul className="flex items-center flex-wrap justify-between gap-2 mb-10 list-disc pl-4">
+                        <li
+                          className={`font-[Manrope] ${
+                            atLeast8Character
+                              ? "text-[#219040]"
+                              : "text-[#63666A]"
+                          }`}
+                        >
+                          At least 8 characters
+                        </li>
+                        <li
+                          className={`font-[Manrope] ${
+                            hasUppercaseCharacter
+                              ? "text-[#219040]"
+                              : "text-[#63666A]"
+                          }`}
+                        >
+                          Upper-case letters (A-Z)
+                        </li>
+                        <li
+                          className={`font-[Manrope] ${
+                            hasNumber ? "text-[#219040]" : "text-[#63666A]"
+                          }`}
+                        >
+                          Numbers (0-9)
+                        </li>
+                        <li
+                          className={`font-[Manrope] ${
+                            hasLowercaseCharacter
+                              ? "text-[#219040]"
+                              : "text-[#63666A]"
+                          }`}
+                        >
+                          Lower-case letters (a-z)
+                        </li>
+                        <li
+                          className={`font-[Manrope] ${
+                            hasSpecialCharacter
+                              ? "text-[#219040]"
+                              : "text-[#63666A]"
+                          }`}
+                        >
+                          Special characters (@,_*!/-)
+                        </li>
+                      </ul>
                     </div>
                   </FormStep>
                   <FormStep

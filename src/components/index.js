@@ -5,7 +5,7 @@ export { FormItem } from "./FormItem";
 export { Hamburger } from "./Hamburger";
 export { Topbar } from "./Topbar";
 export { Progress } from "./Progress";
-export { StepCustom } from "./Step";
+export { Steps } from "./Steps";
 export { Participant } from "./Participant";
 export { Partner } from "./Partner";
 export { LevelBar } from "./Levelbar";
