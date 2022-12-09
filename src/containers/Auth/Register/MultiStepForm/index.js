@@ -1,3 +1,4 @@
+import { Steps } from "antd";
 import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -17,8 +18,23 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
       next(values);
     }
   };
+  const items = [
+    {
+      key:"First",
+      title: 'First',
+    },
+    {
+      key:"Second",
+      title: 'Second',
+    },
+    {
+      key:"Last",
+      title: 'Last',
+    },
+  ];
   return (
     <div className="pt-20">
+      <Steps current={currentStepIndex} items={items} />
       <Formik
         initialValues={snapshot}
         onSubmit={handleSubmit}
@@ -30,7 +46,7 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
             <div className="flex justify-between items-center">
               <p className="font-[Manrope] text-md text-[#585858]">
                 Already have an account?
-                <Link to={"/login"} className="text-[#0067FF]">
+                <Link to={"/login"} className="ml-1 text-[#0067FF]">
                   Log In
                 </Link>
               </p>

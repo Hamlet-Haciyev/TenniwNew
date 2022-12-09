@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Col, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Icon from "../../../helpers/icons";
 import LoginImg from "../../../assets/images/login.png";
 import * as Yup from "yup";
-import {
-  Formik,
-  useFormik,
-  Field,
-  ErrorMessage,
-  yupToFormErrors,
-} from "formik";
+import { Field } from "formik";
 import MultiStepForm, { FormStep } from "./MultiStepForm";
 import { Steps } from "../../../components";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { useLocalstorage } from "../../../hooks/useLocalstorage";
 const Register = () => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("Name is required"),
     lastName: Yup.string().required("Surname is required"),
-    email: Yup.string().email().required(),
-    phone: Yup.number("only number").required(),
+    email: Yup.string().email("email is not valid").required(),
+    phone: Yup.number("phone number can only consist of digits").required(),
   });
   const [value, setValue] = useState();
   const [atLeast8Character, setAtLeast8Character] = useState(false);
@@ -29,6 +24,7 @@ const Register = () => {
   const [hasLowercaseCharacter, sethasLowercaseCharacter] = useState(false);
   const [hasNumber, sethasNumber] = useState(false);
   const [hasSpecialCharacter, sethasSpecialCharacter] = useState(false);
+  const [storeVal, setStoreVal] = useLocalstorage("user", {});
   const checkPasswordValidation = (psw) => {
     if (psw.trim().length >= 8) {
       setAtLeast8Character(true);
@@ -78,9 +74,7 @@ const Register = () => {
                 <h2 className="font-[Manrope] font-semibold text-[#000000] text-3xl my-10">
                   Create an account
                 </h2>
-                <div className="">
-                  <Steps />
-                </div>
+                <div className="">{/* <Steps /> */}</div>
                 <MultiStepForm
                   initialValues={{
                     firstName: "",
@@ -94,6 +88,7 @@ const Register = () => {
                   }}
                   onSubmit={(values) => {
                     alert(JSON.stringify(values, null, 2));
+                    setStoreVal(JSON.stringify(values, null, 2));
                   }}
                 >
                   <FormStep
@@ -110,13 +105,32 @@ const Register = () => {
                           >
                             Name
                           </label>
-                          <Field
-                            type="text"
-                            name="firstName"
-                            placeholder="Mark"
-                            id="name"
-                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
-                          />
+                          <Field name="firstName">
+                            {({
+                              field, // { name, value, onChange, onBlur }
+                              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                              meta,
+                            }) => (
+                              <>
+                                <input
+                                  id="name"
+                                  type="text"
+                                  placeholder="Mark"
+                                  {...field}
+                                  className={`font-[Manrope] text-md border ${
+                                    meta.touched && meta.error
+                                      ? "border-[#C72D2D]"
+                                      : "border-[#C2C8D0]"
+                                  } rounded-md p-3 outline-none w-full`}
+                                />
+                                {meta.touched && meta.error && (
+                                  <div className="text-red-600 text-sm font-Manrope">
+                                    {meta.error}
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </Field>
                         </div>
                         <div className="flex flex-col w-[50%]">
                           <label
@@ -125,13 +139,32 @@ const Register = () => {
                           >
                             Surname
                           </label>
-                          <Field
-                            id="surname"
-                            type="text"
-                            name="lastName"
-                            placeholder="Thomas"
-                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
-                          />
+                          <Field name="lastName">
+                            {({
+                              field,
+                              form: { touched, errors },
+                              meta,
+                            }) => (
+                              <>
+                                <input
+                                  id="surname"
+                                  type="number"
+                                  placeholder="Thomas"
+                                  {...field}
+                                  className={`font-[Manrope] text-md border ${
+                                    meta.touched && meta.error
+                                      ? "border-[#C72D2D]"
+                                      : "border-[#C2C8D0]"
+                                  } rounded-md p-3 outline-none w-full`}
+                                />
+                                {meta.touched && meta.error && (
+                                  <div className="text-red-600 text-sm font-Manrope">
+                                    {meta.error}
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </Field>
                         </div>
                       </div>
                       <div className="flex justify-between">
@@ -142,13 +175,32 @@ const Register = () => {
                           >
                             Email
                           </label>
-                          <Field
-                            type="email"
-                            name="email"
-                            placeholder="mark@example.com"
-                            id="email"
-                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
-                          />
+                          <Field name="email">
+                            {({
+                              field, 
+                              form: { touched, errors }, 
+                              meta,
+                            }) => (
+                              <>
+                                <input
+                                  id="surname"
+                                  type="email"
+                                  placeholder="mark@example.com"
+                                  {...field}
+                                  className={`font-[Manrope] text-md border ${
+                                    meta.touched && meta.error
+                                      ? "border-[#C72D2D]"
+                                      : "border-[#C2C8D0]"
+                                  } rounded-md p-3 outline-none w-full`}
+                                />
+                                {meta.touched && meta.error && (
+                                  <div className="text-red-600 text-sm font-Manrope">
+                                    {errors.email}
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </Field>
                         </div>
                         <div className="flex flex-col w-[50%]">
                           <label
@@ -166,13 +218,33 @@ const Register = () => {
                             className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
                             name="phone"
                            /> */}
-                          <Field
-                            type="text"
-                            name="phone"
-                            placeholder="XX XXX XX XX"
-                            id="phone"
-                            className="font-[Manrope] text-md border border-[#C2C8D0] rounded-md p-3 outline-none"
-                          />
+
+                          <Field name="phone">
+                            {({
+                              field,
+                              form: { touched, errors },
+                              meta,
+                            }) => (
+                              <>
+                                <input
+                                  id="phone"
+                                  type="text"
+                                  placeholder="XX XXX XX XX"
+                                  {...field}
+                                  className={`font-[Manrope] text-md border ${
+                                    meta.touched && meta.error
+                                      ? "border-[#C72D2D]"
+                                      : "border-[#C2C8D0]"
+                                  } rounded-md p-3 outline-none w-full`}
+                                />
+                                {meta.touched && meta.error && (
+                                  <div className="text-red-600 text-sm font-Manrope">
+                                    {meta.error}
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </Field>
                         </div>
                       </div>
                     </div>
@@ -181,7 +253,14 @@ const Register = () => {
                     stepName="Security"
                     onSubmit={() => console.log("step2 submit")}
                     validationSchema={Yup.object({
-                      password: Yup.string().min(4).max(15).required(),
+                      password: Yup.string()
+                        .min(4)
+                        .max(15)
+                        .required()
+                        .matches(
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+                          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+                        ),
                       confirmPassword: Yup.string().oneOf([
                         Yup.ref("password"),
                         null,

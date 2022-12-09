@@ -679,6 +679,14 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -902,6 +910,11 @@ video {
 .border-\[\#0066FF\] {
   --tw-border-opacity: 1;
   border-color: rgb(0 102 255 / var(--tw-border-opacity));
+}
+
+.border-\[\#C72D2D\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(199 45 45 / var(--tw-border-opacity));
 }
 
 .bg-\[\#0066FF\] {
@@ -1272,15 +1285,6 @@ video {
 .progress-step::before {
   counter-increment: step;
   content: counter(step);
-}
-
-.focus\:border-none:focus {
-  border-style: none;
-}
-
-.focus\:outline-none:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
 }
 
 @media (min-width: 640px) {
