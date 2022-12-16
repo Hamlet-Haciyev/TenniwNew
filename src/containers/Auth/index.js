@@ -1,1 +1,0 @@
-// Login ve Register sehifesi oxsardi ilerleyen vaxtlarda onlari burada birlesedirecem.

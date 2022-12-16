@@ -15,6 +15,7 @@ module.exports = {
       },
       backgroundImage: {
         partnerBG: "url('assets/images/partnerBG.png')",
+        authBG:"url('assets/images/login.png')"
       },
     },
   },

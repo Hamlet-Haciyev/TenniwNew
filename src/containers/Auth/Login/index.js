@@ -1,221 +1,158 @@
-import { Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Col, Row } from "antd";
+import * as Yup from "yup";
 import styled from "styled-components";
-import { Button } from "../../../components";
 import Icon from "../../../helpers/icons";
-import {
-  emailRule,
-  passwordMin8Rule,
-  passwordMax30Rule,
-  minUppercaseLetterRule,
-  minLowercaseLetterRule,
-  minOneDigitRule,
-} from "../../../utils/checkValidation";
 import { updateAuthhorize } from "../../../store/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { Col, Row } from "antd";
-import LoginImg from "../../../assets/images/login.png";
-const { Password } = Input;
+import { logo } from "../../../assets";
+import { Field, Form, Formik } from "formik";
+import { useLocalstorage } from "../../../hooks/useLocalstorage";
 const Login = () => {
-  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const onFinish = (values) => {
-    console.log("Success:", values);
-    dispatch(updateAuthhorize());
-    navigate("/dashboard");
+  const getLocalStorage = useLocalstorage("user");
+  const handleSubmit = (values) => {
+    const { email, password } = JSON.parse(getLocalStorage[0]);
+    if (email == values.email && password == values.password) {
+      dispatch(updateAuthhorize(true));
+      navigate("/dashboard");
+    } else {
+      alert("Password or Email is not correct");
+    }
   };
-  const onFinishFailed = (values) => {
-    console.log("Failed:", values);
-  };
-
-  const onClick = () => {
-    console.log(form[0]?.email);
-    form.setFieldValue({
-      email: form[0]?.email,
-      password: form[0]?.password,
-    });
-  };
-
   return (
     <AuthLayout>
-      <Row>
-        <Col span={11}>
-          <ImageWrapper>
-            <Icon name={"logo"} width={"200"} height={"60"} />
-            <img src={LoginImg} alt="login" />
-          </ImageWrapper>
+      <Row className="w-full">
+        <Col xl={11} lg={24}>
+          <div className="relative">
+            <div className="absolute top-10 left-10 max-[1199.5px]:hidden">
+              <Icon name={"logo"} width={"200"} height={"60"} />
+            </div>
+            <div className="bg-authBG bg-cover bg-no-repeat h-[100vh] max-[1199.5px]:hidden"></div>
+          </div>
         </Col>
-        <Col span={13}>
-          <LoginWrapper>
-            <LoginContainer>
-              <GoBackLink>
-                <Link to={"/"}>
-                  <Icon name={"leftArrow"} /> Go back
-                </Link>
-              </GoBackLink>
-              <LoginView>
-                <Head>Welcome back!</Head>
-                <RedirectInfo>Log in to your account</RedirectInfo>
-                <Form
-                  name="login"
-                  layout="vertical"
-                  initialValues={{
-                    remember: true,
-                  }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  form={form}
+        <Col xl={13} lg={24} className="w-full">
+          <div className="bg-[#fff] h-[100%]">
+            <div className="max-w-[720px] mx-auto py-[58px]">
+              <div className="mb-6">
+                <Link
+                  to={"/"}
+                  className="flex items-center leading-7 text-[#0067ff]"
                 >
-                  <Form.Item
-                    label="Email or Mobile number"
-                    name="email"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your email or mobile number!",
-                      },
-                      emailRule,
-                    ]}
-                    required={false}
-                  >
-                    <InputWrapper placeholder={"mark@example.com"} />
-                  </Form.Item>
-
-                  <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your password!",
-                      },
-                      passwordMin8Rule,
-                      passwordMax30Rule,
-                    ]}
-                    required={false}
-                  >
-                    <PasswordWrapper />
-                  </Form.Item>
-                  <ForgotPasswordWrapper>
-                    <Link to={"/forgotpassword"}>Forgot your password?</Link>
-                  </ForgotPasswordWrapper>
-                  <Form.Item>
-                    <Button
-                      htmlType="submit"
-                      onClick={onClick}
-                      width={"100%"}
-                      bgcolor={"#0066FF"}
-                      color={"#fff"}
-                      padding={"25px 0"}
-                      mb={20}
+                  <Icon name={"leftArrow"} />{" "}
+                  <span className="ml-3 font-Manrope text-[16px]">Go back</span>
+                </Link>
+              </div>
+              <div className="max:[776px]:mx-auto max:[776px]:width-[300px] min-[776px]:pl-[170px] min-[776px]:pt-7 min-[776px]:pb-8 min-[776px]:pr-48">
+                <img
+                  src={logo}
+                  alt="logo"
+                  className="mb-5 min-[1199.5px]:hidden"
+                />
+                <h2 className="font-[Manrope] text-lg text-[#707070] leading-8 mb-2">
+                  Welcome back!
+                </h2>
+                <p className="font-[Manrope] font-semibold text-3xl text-[#000000] leading-[55px] mb-5">
+                  Log in to your account
+                </p>
+                <Formik
+                  initialValues={{ email: "", password: "" }}
+                  validationSchema={Yup.object({
+                    email: Yup.string()
+                      .email("Invalid email address")
+                      .required("Email is Required"),
+                    password: Yup.string().required("Password fill in the blank"),
+                  })}
+                  onSubmit={(values) => {
+                    handleSubmit(values);
+                  }}
+                >
+                  <Form>
+                    <Field name="email">
+                      {({ field, form: { touched, errors }, meta }) => (
+                        <div className="mb-5">
+                          <label
+                            htmlFor="email"
+                            className="block font-Manrope text-md text-[#585858] mb-2"
+                          >
+                            Email
+                          </label>
+                          <input
+                            id="email"
+                            type="email"
+                            placeholder="mark@example.com"
+                            {...field}
+                            className="font-Manrope border border-[#C2C8D0] rounded-md py-4 px-2 outline-none w-full placeholder:text-[#C2C8D0]"
+                          />
+                          {meta.touched && meta.error && (
+                            <div className="text-[#C72D2D] text-[13px] font-[Manrope] mt-1 ml-1">
+                              {meta.error}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </Field>
+                    <Field name="password">
+                      {({ field, form: { touched, errors }, meta }) => (
+                        <div className="mb-5">
+                          <label
+                            htmlFor="password"
+                            className="block font-Manrope text-md text-[#585858] mb-2"
+                          >
+                            Password
+                          </label>
+                          <input
+                            id="password"
+                            type="password"
+                            placeholder="**************"
+                            {...field}
+                            className="font-Manrope border border-[#C2C8D0] rounded-md py-4 px-2 outline-none w-full"
+                          />
+                          {meta.touched && meta.error && (
+                            <div className="text-[#C72D2D] text-[13px] font-[Manrope] mt-1 ml-1">
+                              {meta.error}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </Field>
+                    <p className="text-end text-md font-Manrope mb-4">
+                      <Link
+                        to={"/forgotpassword"}
+                        className="font-Manrope text-[#0067FF] ml-2"
+                      >
+                        Forgot your password?
+                      </Link>
+                    </p>
+                    <button
+                      type="submit"
+                      className="font-Manrope font-bold text-[#FFFFFF] text-md bg-[#0067FF] w-full rounded-md py-4"
                     >
-                      <ButtonText>Log In</ButtonText>
-                    </Button>
-                  </Form.Item>
-                  <SignUpWrapper>
-                    <span>Don’t have an account? </span>
-                    <Link to={"/reg"}>Let’s create one!</Link>
-                  </SignUpWrapper>
-                </Form>
-              </LoginView>
-            </LoginContainer>
-          </LoginWrapper>
+                      Log In
+                    </button>
+                  </Form>
+                </Formik>
+                <p className="text-center text-[16px] text-[#585858] font-Manrope mt-5">
+                  Don’t have an account?
+                  <Link
+                    to={"/reg"}
+                    className="font-Manrope text-[#0067FF] ml-2"
+                  >
+                    Let’s create one!
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
         </Col>
       </Row>
     </AuthLayout>
   );
 };
-const GoBackLink = styled.div`
-  display: inline-block;
-  margin-bottom: 20px;
-  a {
-    display: flex;
-    align-items: center;
-    font-family: "Manrope";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 27px;
-    color: #0067ff;
-    svg {
-      margin-right: 10px;
-    }
-  }
-`;
-const LoginView = styled.div`
-  padding: 30px 170px 40px 170px;
-  .ant-form {
-    width: 355px;
-  }
-`;
-const Head = styled.h2`
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 33px;
-  color: #707070;
-`;
-const RedirectInfo = styled.p`
-  font-family: "Manrope";
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 55px;
-  color: #000000;
-  white-space: nowrap;
-  margin-bottom: 20px;
-`;
-const ForgotPasswordWrapper = styled.div`
-  display: flex;
-  justify-content: end;
-  margin-bottom: 15px;
-  a {
-    font-family: "Manrope";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 25px;
-    text-align: right;
-    color: #0067ff;
-  }
-`;
-const SignUpWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  font-family: "Manrope";
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 27px;
-  span {
-    color: #585858;
-    margin-right: 10px;
-  }
-  a {
-    color: #0066ff;
-  }
-`;
-const ButtonText = styled.span`
-  font-family: "Manrope";
-  font-weight: 800;
-  font-size: 15px;
-  color: #ffffff;
-`;
 const AuthLayout = styled.div`
-  height: 100vh;
-  overflow: hidden;
-`;
-const LoginWrapper = styled.div`
-  background-color: #fff;
-  height: 100%;
-`;
-const LoginContainer = styled.div`
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 60px 0;
+  background-color: white;
 `;
 const ImageWrapper = styled.div`
   position: relative;
@@ -223,26 +160,6 @@ const ImageWrapper = styled.div`
     position: absolute;
     top: 40px;
     left: 40px;
-  }
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-`;
-
-const InputWrapper = styled(Input)`
-  border: 1px solid #c2c8d0;
-  border-radius: 7px;
-  padding: 17px 10px;
-`;
-const PasswordWrapper = styled(Password)`
-  border: 1px solid #c2c8d0;
-  border-radius: 7px;
-  padding: 17px 10px;
-  &::placeholder {
-    font-size: 20px;
-    width: 20px;
   }
 `;
 export default Login;

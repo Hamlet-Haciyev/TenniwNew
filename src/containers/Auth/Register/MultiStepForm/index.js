@@ -1,4 +1,3 @@
-import { Steps } from "antd";
 import { Form, Formik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -18,23 +17,8 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
       next(values);
     }
   };
-  const items = [
-    {
-      key:"First",
-      title: 'First',
-    },
-    {
-      key:"Second",
-      title: 'Second',
-    },
-    {
-      key:"Last",
-      title: 'Last',
-    },
-  ];
   return (
     <div className="pt-20">
-      <Steps current={currentStepIndex} items={items} />
       <Formik
         initialValues={snapshot}
         onSubmit={handleSubmit}
