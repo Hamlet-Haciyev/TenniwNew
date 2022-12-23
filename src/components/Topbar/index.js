@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { updateAuthhorize } from "../../store/auth";
 import { useSelector, useDispatch } from "react-redux";
 
-export const Topbar = () => {
+const Topbar = () => {
   const dispatch = useDispatch();
   const ChangePage = () => {
     dispatch(updateAuthhorize(false));
@@ -91,3 +91,4 @@ const TopbarRow = styled.div`
   width: 100%;
   padding: 0 2rem;
 `;
+export default Topbar;

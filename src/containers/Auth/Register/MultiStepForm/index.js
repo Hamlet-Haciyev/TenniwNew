@@ -18,7 +18,7 @@ const MultiStepForm = ({ children, initialValues, onSubmit }) => {
     }
   };
   return (
-    <div className="pt-20">
+    <div className="pt-16">
       <Formik
         initialValues={snapshot}
         onSubmit={handleSubmit}

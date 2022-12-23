@@ -1,7 +1,7 @@
 import React from "react";
 import { Button as AntButton } from "antd";
 import styled, { css } from "styled-components";
-export const Button = ({
+ const Button = ({
   children,
   borradius,
   bgcolor,
@@ -58,3 +58,4 @@ const ButtonStyled = styled(AntButton)`
     border: 1px solid transparent;
   }
 `;
+export default Button

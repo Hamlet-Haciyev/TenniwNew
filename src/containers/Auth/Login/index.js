@@ -36,20 +36,20 @@ const Login = () => {
         <Col xl={13} lg={24} className="w-full">
           <div className="bg-[#fff] h-[100%]">
             <div className="max-w-[720px] mx-auto py-[58px]">
-              <div className="mb-6">
+              <div className="w-[max-content] max-[776px]:pl-5 mb-6">
                 <Link
                   to={"/"}
                   className="flex items-center leading-7 text-[#0067ff]"
                 >
-                  <Icon name={"leftArrow"} />{" "}
+                  <Icon name={"leftArrow"} />
                   <span className="ml-3 font-Manrope text-[16px]">Go back</span>
                 </Link>
               </div>
-              <div className="max:[776px]:mx-auto max:[776px]:width-[300px] min-[776px]:pl-[170px] min-[776px]:pt-7 min-[776px]:pb-8 min-[776px]:pr-48">
+              <div className="max-[776px]:px-14 min-[776px]:pl-[170px] min-[776px]:pt-7 min-[776px]:pb-8 min-[776px]:pr-48">
                 <img
                   src={logo}
                   alt="logo"
-                  className="mb-5 min-[1199.5px]:hidden"
+                  className="min-[1199.5px]:hidden"
                 />
                 <h2 className="font-[Manrope] text-lg text-[#707070] leading-8 mb-2">
                   Welcome back!
@@ -63,7 +63,9 @@ const Login = () => {
                     email: Yup.string()
                       .email("Invalid email address")
                       .required("Email is Required"),
-                    password: Yup.string().required("Password fill in the blank"),
+                    password: Yup.string().required(
+                      "Password fill in the blank"
+                    ),
                   })}
                   onSubmit={(values) => {
                     handleSubmit(values);
@@ -84,7 +86,9 @@ const Login = () => {
                             type="email"
                             placeholder="mark@example.com"
                             {...field}
-                            className="font-Manrope border border-[#C2C8D0] rounded-md py-4 px-2 outline-none w-full placeholder:text-[#C2C8D0]"
+                            className={`${
+                              errors.email ? "border-[#C72D2D]" : ""
+                            } font-Manrope border border-[#C2C8D0] rounded-md py-4 px-2 outline-none w-full placeholder:text-[#C2C8D0]`}
                           />
                           {meta.touched && meta.error && (
                             <div className="text-[#C72D2D] text-[13px] font-[Manrope] mt-1 ml-1">
@@ -108,7 +112,9 @@ const Login = () => {
                             type="password"
                             placeholder="**************"
                             {...field}
-                            className="font-Manrope border border-[#C2C8D0] rounded-md py-4 px-2 outline-none w-full"
+                            className={`${
+                              errors.password ? "border-[#C72D2D]" : ""
+                            } font-Manrope border border-[#C2C8D0] rounded-md py-4 px-2 outline-none w-full`}
                           />
                           {meta.touched && meta.error && (
                             <div className="text-[#C72D2D] text-[13px] font-[Manrope] mt-1 ml-1">
@@ -154,12 +160,5 @@ const Login = () => {
 const AuthLayout = styled.div`
   background-color: white;
 `;
-const ImageWrapper = styled.div`
-  position: relative;
-  svg {
-    position: absolute;
-    top: 40px;
-    left: 40px;
-  }
-`;
+
 export default Login;

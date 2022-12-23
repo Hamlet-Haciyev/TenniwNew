@@ -1,6 +1,6 @@
 import { Progress as AntProgress } from "antd";
 import styled from "styled-components";
-export const Progress = ({ percent = 50, width = 50, type, strokeWidth }) => {
+const Progress = ({ percent = 50, width = 50, type, strokeWidth }) => {
   return (
     <ProgressBarWrapper>
       <AntProgress
@@ -20,3 +20,4 @@ const ProgressBarWrapper = styled.div`
     margin: 0 5px;
   }
 `;
+export default Progress;

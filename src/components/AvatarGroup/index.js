@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar as AntAvatar } from "antd";
-export const AvatarGroup = ({ children }) => {
+ const AvatarGroup = ({ children }) => {
   return (
     <AntAvatar.Group>
       {React.Children.map(children, (child, index) => {
@@ -9,3 +9,4 @@ export const AvatarGroup = ({ children }) => {
     </AntAvatar.Group>
   );
 };
+export default AvatarGroup

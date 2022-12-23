@@ -40,37 +40,6 @@ const PartnerPage = () => {
     const [min, max] = value;
     setPlayerLevel({ min, max });
   };
-
-  //#region old Filter
-  // const displayPartnerForSort = (partner) => {
-  //   let matchesSex = false;
-  //   let matchesPhotoRequired = false;
-  //   let matchesAge = false;
-  //   let matchesPlayerLevel = false;
-  //   let matchesName = false;
-  //   let matchesGameType = false;
-  //   if (isRequiredPhoto) {
-  //     matchesPhotoRequired = partner.profilePhoto == isRequiredPhoto;
-  //   } else {
-  //     matchesPhotoRequired = true;
-  //   }
-  //   matchesSex = partner.sex == selectedSex;
-  //   matchesAge = partner.age >= age.min && partner.age <= age.max;
-  //   matchesPlayerLevel =
-  //     partner.levelMin >= playerLevel.min ||
-  //     partner.levelMax <= playerLevel.max;
-  //   if (search) matchesName = partner.name.toLowerCase().includes(search);
-  //   else matchesName = true;
-  //   return (
-  //     matchesSex &&
-  //     matchesAge &&
-  //     matchesPlayerLevel &&
-  //     matchesPhotoRequired &&
-  //     matchesName &&
-  //     matchesGameType
-  //   );
-  // };
-  //#endregion
   const filterPartner = () => {
     let updateList = partners;
     if (selectedSex) {
@@ -156,7 +125,7 @@ const PartnerPage = () => {
           </button>
         </div>
       </div>
-      <div className="py-10 w-[1250px] mx-auto">
+      <div className="py-10 w-[1050px] mx-auto">
         {loading ? (
           <Row gutter={[16]} className="w-full">
             <Col lg={4}>

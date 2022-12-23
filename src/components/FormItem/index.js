@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const { Item } = Form;
 
-export const FormItem = ({
+ const FormItem = ({
   children,
   auto = false,
   info = {
@@ -110,3 +110,4 @@ const StyledTooltip = styled.div`
     color: #555555;
   }
 `;
+export default FormItem

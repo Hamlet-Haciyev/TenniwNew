@@ -1,26 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import participant from "../../assets/images/participant.png";
-import { Progress ,Avatar} from "antd";
+import { Progress, Avatar } from "antd";
 import { red, green, blue, yellow, orange } from "@ant-design/colors";
-export const Participant = ({ name, power = 0,tournamentType }) => {
+const Participant = ({ name, power = 0, tournamentType }) => {
   return (
     <ParticipantView>
       <ImgContainer>
-      {tournamentType == "Single" ? (
-            <img src={participant} />
-          ) : (
-            <Avatar.Group>
-              <Avatar src="https://joeschmoe.io/api/v1/random" />
-              <Avatar
-                style={{
-                  backgroundColor: "#f56a00",
-                }}
-              >
-                K
-              </Avatar>
-            </Avatar.Group>
-          )}
+        {tournamentType == "Single" ? (
+          <img src={participant} />
+        ) : (
+          <Avatar.Group>
+            <Avatar src="https://joeschmoe.io/api/v1/random" />
+            <Avatar
+              style={{
+                backgroundColor: "#f56a00",
+              }}
+            >
+              K
+            </Avatar>
+          </Avatar.Group>
+        )}
       </ImgContainer>
       <ParticipantInfo>
         <Name>{name}</Name>
@@ -83,3 +83,4 @@ const ProgressWrapper = styled.div`
     }
   }
 `;
+export default Participant;

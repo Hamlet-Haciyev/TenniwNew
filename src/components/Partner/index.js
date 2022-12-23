@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import profile from "../../assets/images/partner.png";
 import Icon from "../../helpers/icons";
 import { LevelBar } from "../../components";
-export const Partner = ({ partner, onClick }) => {
+const Partner = ({ partner, onClick }) => {
   return (
     <div
       onClick={onClick}
@@ -93,3 +93,4 @@ export const Partner = ({ partner, onClick }) => {
     </div>
   );
 };
+export default Partner;

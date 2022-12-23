@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Steps = () => {
+const Steps = () => {
   return (
     <div className="relative flex justify-between progressbar">
       <div
@@ -18,3 +18,4 @@ export const Steps = () => {
     </div>
   );
 };
+export default Steps;
