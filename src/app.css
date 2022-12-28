@@ -18,8 +18,8 @@
   color: #525252;
   border: 2px solid #dcdcdc;
 }
-.progress-step-active{
-  background-color: #0066FF;
+.progress-step-active {
+  background-color: #0066ff;
   color: #f3f3f3;
   border: 2px solid transparent;
 }
@@ -33,4 +33,9 @@
 .progress-step::before {
   counter-increment: step;
   content: counter(step);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

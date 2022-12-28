@@ -148,7 +148,6 @@ const PartnerPage = () => {
               </div>
             </Col>
             <Col lg={20}>
-              <div className="flex flex-col">
                 <div className="flex flex-col">
                   <h4 className="text-2xl font-[Manrope] font-semibold mb-4">
                     Recommended
@@ -167,7 +166,6 @@ const PartnerPage = () => {
                       : "Partner Not found"}
                   </div>
                 </div>
-              </div>
             </Col>
           </Row>
         ) : (

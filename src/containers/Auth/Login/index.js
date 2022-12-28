@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 import * as Yup from "yup";
 import styled from "styled-components";
 import Icon from "../../../helpers/icons";
 import { updateAuthhorize } from "../../../store/auth";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logo } from "../../../assets";
 import { Field, Form, Formik } from "formik";
 import { useLocalstorage } from "../../../hooks/useLocalstorage";

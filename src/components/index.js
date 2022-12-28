@@ -1,11 +1,9 @@
 export { default as AvatarGroup } from "./AvatarGroup";
 export { default as Button } from "./Button";
 export { default as Navbar } from "./Navbar";
-export { default as FormItem } from "./FormItem";
 export { default as Hamburger } from "./Hamburger";
 export { default as Topbar } from "./Topbar";
 export { default as Progress } from "./Progress";
-export { default as Steps } from "./Steps";
 export { default as Participant } from "./Participant";
 export { default as Partner } from "./Partner";
 export { default as LevelBar } from "./Levelbar";
